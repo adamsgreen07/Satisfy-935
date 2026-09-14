@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<iq:manifest version="3" xmlns:iq="http://www.garmin.com/xml/connectiq">
+    <iq:application
+        id="01f19f14-595b-4c6f-9630-a4243c656f19"
+        type="watchface"
+        name="@Strings.AppName"
+        entry="Satisfy935App"
+        launcherIcon="@Drawables.LauncherIcon"
+        minSdkVersion="3.1.0">
+        <iq:products>
+            <iq:product id="fr935"/>
+        </iq:products>
+        <iq:permissions>
+            <iq:uses-permission id="SensorHistory"/>
+        </iq:permissions>
+        <iq:languages>
+            <iq:language>eng</iq:language>
+        </iq:languages>
+        <iq:barrels/>
+    </iq:application>
+</iq:manifest>
