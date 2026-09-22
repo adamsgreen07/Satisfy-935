@@ -1,0 +1,38 @@
+name: Build Satisfy 935
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate developer key
+        run: |
+          openssl genrsa -out developer_key.pem 4096
+          openssl pkcs8 -topk8 \
+            -inform PEM \
+            -outform DER \
+            -in developer_key.pem \
+            -out developer_key.der \
+            -nocrypt
+
+      - name: Build Garmin PRG
+        uses: blackshadev/garmin-connectiq-build-action@9.2.0
+        with:
+          projectJungle: ./monkey.jungle
+          developerKey: ./developer_key.der
+          outputPath: ./out/Satisfy935.prg
+          device: fr935
+          typeCheck: '1'
+
+      - name: Upload PRG
+        uses: actions/upload-artifact@v4
+        with:
+          name: Satisfy935-FR935
+          path: ./out/Satisfy935.prg
